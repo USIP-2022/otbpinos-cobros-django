@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  appseed-app:
-    container_name: appseed_app
+  python:
+    container_name: python-django
     restart: always
     env_file: .env
     build: .
@@ -9,7 +9,7 @@ services:
       - db_network
       - web_network
   nginx:
-    container_name: nginx
+    container_name: nginx-django
     restart: always
     image: "nginx:latest"
     ports:
@@ -18,11 +18,26 @@ services:
       - ./nginx:/etc/nginx/conf.d
     networks:
       - web_network
-    depends_on: 
-      - appseed-app
+    depends_on:
+      - python
+  postgres:
+    image: postgres
+    container_name: postgres-django
+    restart: unless-stopped
+    volumes:
+      - "./postgres/backup:/tmp/"
+      - "db:/var/lib/postgresql/data"
+    env_file:
+      - postgres/database.env # configure postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - db_network
 networks:
   db_network:
     driver: bridge
   web_network:
     driver: bridge
- 
+volumes:
+  db:
+    driver: local
