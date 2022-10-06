@@ -29,10 +29,10 @@ class TipoInmueble(models.TextChoices):
     casa = 'CASA', 'Casa'
 
 
-class Propietarios(models.Model):
+class Propietario(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user_id = models.IntegerField()
-    avatar = models.TextField()
+    user_id = models.IntegerField(blank=True, null=True)
+    avatar = models.TextField(blank=True, null=True)
     nombres = models.CharField(max_length=200)
     paterno = models.CharField(max_length=200)
     materno = models.CharField(max_length=200)
@@ -50,13 +50,13 @@ class Propietarios(models.Model):
         return self.paterno + " " + self.materno + " " + self.nombres
 
 
-class Inmuebles(models.Model):
+class Inmueble(models.Model):
     id = models.BigAutoField(primary_key=True)
-    propietario = models.ForeignKey(Propietarios, on_delete=models.CASCADE)
+    propietario = models.ForeignKey(Propietario, on_delete=models.CASCADE)
     inmueble_numero = models.IntegerField()
     inmueble_nombre = models.CharField(max_length=200)
     lote_superficie = models.DecimalField(decimal_places=2, max_digits=10)
-    tipo_inmueble = models.CharField(max_length=1, choices=TipoInmueble.choices, default=TipoInmueble.lote)
+    tipo_inmueble = models.CharField(max_length=20, choices=TipoInmueble.choices, default=TipoInmueble.lote)
     estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
     fecha_ingreso = models.DateField()
     created = models.DateTimeField(auto_now_add=True)
@@ -66,7 +66,7 @@ class Inmuebles(models.Model):
         return self.inmueble_nombre
 
 
-class Reuniones(models.Model):
+class Reunion(models.Model):
     id = models.BigAutoField(primary_key=True)
     fecha_reunion = models.DateTimeField()
     motivo = models.TextField()
@@ -78,10 +78,10 @@ class Reuniones(models.Model):
     def __str__(self):
         return self.fecha_reunion
 
-class Asistencias(models.Model):
+class Asistencia(models.Model):
     id = models.BigAutoField(primary_key=True)
-    inmueble = models.ForeignKey(Inmuebles, on_delete=models.CASCADE)
-    reunion = models.ForeignKey(Reuniones, on_delete=models.CASCADE)
+    inmueble = models.ForeignKey(Inmueble, on_delete=models.CASCADE)
+    reunion = models.ForeignKey(Reunion, on_delete=models.CASCADE)
     tipo_asistencia = models.CharField(max_length=1, choices=TipoAsistencia.choices, default=TipoAsistencia.presente)
     motivo_permiso = models.TextField()
     estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
@@ -93,7 +93,7 @@ class Asistencias(models.Model):
         return self.id
 
 
-class Gestiones(models.Model):
+class Gestion(models.Model):
     id = models.BigAutoField(primary_key=True)
     gestion = models.IntegerField()
     descripcion = models.TextField()
