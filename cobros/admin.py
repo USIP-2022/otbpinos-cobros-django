@@ -17,7 +17,6 @@ class propietarioAdmin(admin.ModelAdmin):
 class gestionAdmin(admin.ModelAdmin):
     list_display = ("gestion", "estado")
 
-
 class reunionAdmin(admin.ModelAdmin):
     list_display = ("fecha_reunion", "motivo", "estado")
 
