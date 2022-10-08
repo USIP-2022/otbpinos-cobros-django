@@ -146,3 +146,22 @@ class InmuebleAporte(models.Model):
 
     def __int__(self):
         return self.id
+
+class PagoInmuebleAporte(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    inmueble_aporte_id = models.ForeignKey(InmuebleAporte, on_delete=models.CASCADE)
+    monto_pagado = models.DecimalField(decimal_places=2, max_digits=10)
+    pago_id =models.ForeignKey(Pago, on_delete=models.CASCADE)
+    estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+
+    def __int__(self):
+        return self.id
+class Pago(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.CASCADE)
+    monto  = models.DecimalField(decimal_places=2, max_digits=10)
+    reunion = models.ForeignKey(Reunion, on_delete=models.CASCADE)
+    estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+
+    def __int__(self):
+        return self.id
