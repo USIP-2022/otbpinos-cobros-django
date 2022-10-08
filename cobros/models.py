@@ -174,3 +174,15 @@ class Desembolsos(models.Model):
 
     def __int__(self):
         return self.id
+
+class Generico(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user_id = models.IntegerField()
+    propiedad = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=300)
+    valor = models.IntegerField()
+    data = models.CharField(max_length=300)
+    estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+
+    def __int__(self):
+        return self.id
