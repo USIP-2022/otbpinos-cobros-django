@@ -6,8 +6,7 @@ router = DefaultRouter()
 router.register(r"Propietario",views.PropietarioViewSet),
 
 urlpatterns = [
-
-
-    #path('', views.index, name='index'),
-    path('', include(router.urls)),
+    ##path('propietarios/cantidad', views.propietario_contador),
+    path('propietarios/create_list', views.PropietarioCreateAndList.as_view(), name='productos'),
+    path('', include(router.urls))
 ]
