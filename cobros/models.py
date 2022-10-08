@@ -105,14 +105,14 @@ class Gestion(models.Model):
         return self.gestion
 class Multa(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user_id = models.ForeignKey(Propietario, on_delete=models.CASCADE)
+    user_id = models.IntegerField()
     inmueble_id = models.ForeignKey(Inmueble, on_delete=models.CASCADE)
     descripcion = models.CharField(max_length=300)
     monto = models.DecimalField(decimal_places=2, max_digits=10)
     tipo_multa = models.CharField(max_length=200)
     estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
     asistencia_id = models.ForeignKey(Asistencia, on_delete=models.CASCADE)
-    estado_aporte = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+    estado_aporte = models.CharField(max_length=200)
 
     def __int__(self):
         return self.id
@@ -122,6 +122,26 @@ class PagoMulta(models.Model):
     multa_id = models.ForeignKey(Multa, on_delete=models.CASCADE)
     monto_pagado = models.DecimalField(decimal_places=2, max_digits=10)
     pago_id = models.ForeignKey(Multa, on_delete=models.CASCADE)
+    estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+
+    def __int__(self):
+        return self.id
+
+class Aporte(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user_id = models.IntegerField()
+    monto = models.DecimalField(decimal_places=2, max_digits=10)
+    descripcion = models.CharField(max_length=300)
+    fecha_inicio = models.DateField()
+    estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+
+    def __int__(self):
+        return self.id
+
+class InmuebleAporte(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    inmueble_id = models.ForeignKey(Inmueble, on_delete=models.CASCADE)
+    estado_aporte = models.CharField(max_length=100)
     estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
 
     def __int__(self):
