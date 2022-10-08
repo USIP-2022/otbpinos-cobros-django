@@ -30,8 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cobros',  # <-- NEW
+    'rest_framework',  # <-- rest
+    'drf_yasg',  # <-- swagger
     'apps.home'  # Enable the inner home (home)
 ]
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSIONS_CLASSES":{"rest_framework.permissions.AllowAny"},
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,7 +129,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
 )
-
 
 #############################################################
 #############################################################

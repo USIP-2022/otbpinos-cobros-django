@@ -76,7 +76,7 @@ class Reunion(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.fecha_reunion
+        return str(self.motivo)
 
 class Asistencia(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -90,7 +90,7 @@ class Asistencia(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return self.inmueble.inmueble_nombre
 
 
 class Gestion(models.Model):
