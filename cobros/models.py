@@ -165,3 +165,12 @@ class Pago(models.Model):
 
     def __int__(self):
         return self.id
+class Desembolsos(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    motivo = models.CharField(max_length=300)
+    monto  = models.DecimalField(decimal_places=2, max_digits=10)
+    numero_boleta  = models.IntegerField()
+    estado = models.CharField(max_length=1, choices=Estado.choices, default=Estado.activo)
+
+    def __int__(self):
+        return self.id
