@@ -3,7 +3,8 @@ from rest_framework.routers import DefaultRouter
 from . import views
 
 router = DefaultRouter()
-router.register(r"Propietario",views.PropietarioViewSet),
+router.register(r"propietarios",views.PropietarioViewSet),
+#router.register(r"Propietario",views.PropietarioViewSet),
 
 urlpatterns = [
     ##path('propietarios/cantidad', views.propietario_contador),
