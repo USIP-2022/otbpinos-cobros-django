@@ -59,6 +59,7 @@ $ docker exec -it python-django /bin/bash
 $ #create a superuser for login to web
 $ python manage.py createsuperuser
 $ # Access the web app in browser: http://localhost:85/
+$ # Access the web app admin in browser: http://localhost:85/admin
 ```
 
 The project is coded using a simple and intuitive structure presented bellow:
