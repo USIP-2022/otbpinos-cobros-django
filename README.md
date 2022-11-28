@@ -44,7 +44,22 @@ $ # Access the web app in browser: http://127.0.0.1:8000/
 ```
 
 
-## Code-base structure
+## Installation with Docker
+
+> Instructions:
+
+```bash
+$ # Get the code
+$ git clone git@github.com:yacmay/otbpinos-cobros.git
+$ cd otbpinos-cobros
+$ docker-compose up -d
+$ docker container ls
+$ #connected to container python
+$ docker exec -it python-django /bin/bash
+$ #create a superuser for login to web
+$ python manage.py createsuperuser
+$ # Access the web app in browser: http://localhost:85/
+```
 
 The project is coded using a simple and intuitive structure presented bellow:
 
