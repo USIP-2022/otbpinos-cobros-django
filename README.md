@@ -57,11 +57,13 @@ $ docker container ls
 $ #connected to container python
 $ docker exec -it python-django /bin/bash
 $ #create a superuser for login to web
+$ python manage.py migrate
 $ python manage.py createsuperuser
-$ # Access the web app in browser: http://localhost:85/
-$ # Access the web app admin in browser: http://localhost:85/admin
+$ # Access the web app in browser: http://localhost:84/
+$ # Access the web app in webservice get: http://localhost:84/cobros/propietarios/
+$ # Access the web app admin in browser: http://localhost:84/admin
 ```
-
+Link postman: https://www.getpostman.com/collections/351714582039aa919119
 The project is coded using a simple and intuitive structure presented bellow:
 
 ```bash
